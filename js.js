@@ -3,10 +3,13 @@ var array = ["6","3","2","-","8","1","5","7","4"];
 function iniciar(){
     document.getElementById("contenedor").style.opacity="1";
     document.getElementById("boton-inicio").style.display="none";
+    document.getElementById("movimientos").style.display="block";
+    document.getElementById("movimientos").style.cssFloat="left";
 
     cargar();
     
 }
+
 
 function cargar(){
     document.getElementById("cero").innerHTML = array[0];
@@ -22,6 +25,7 @@ function cargar(){
     verificar();
 
 }
+
 function verificar(){
     if(array[0]=="1"){document.getElementById("cero").style.backgroundColor="green"} else{document.getElementById("cero").style.backgroundColor="#f1f1f1"};
     if(array[1]=="2"){document.getElementById("one").style.backgroundColor="green"} else{document.getElementById("one").style.backgroundColor="#f1f1f1"};
@@ -31,7 +35,9 @@ function verificar(){
     if(array[5]=="6"){document.getElementById("five").style.backgroundColor="green"} else{document.getElementById("five").style.backgroundColor="#f1f1f1"};
     if(array[6]=="7"){document.getElementById("six").style.backgroundColor="green"} else{document.getElementById("six").style.backgroundColor="#f1f1f1"};
     if(array[7]=="8"){document.getElementById("seven").style.backgroundColor="green"} else{document.getElementById("seven").style.backgroundColor="#f1f1f1"};
-
+    if(array[0]=="1" && array[1]=="2" && array[2]=="3" && array[3]=="4" && array[4]=="5" && array[5]=="6" && array[6]=="7" && array[7]=="8"){
+        alert("CONTRATULATIONS, YOU WIN!!!!")
+    };
 }
 
 
@@ -46,6 +52,14 @@ function libre(){
     if(array[7]=="-") { document.getElementById("seven").style.color=" #f1f1f1"} else {document.getElementById("seven").style.color="black"};
     if(array[8]=="-") { document.getElementById("eight").style.color=" #f1f1f1"} else {document.getElementById("eight").style.color="black"};
 }
+
+var contador = function(){
+    var cantMov = 0;
+    return function(){
+        cantMov ++;
+        return cantMov;
+    }
+}();
 
 function mover(id){
     var i;
@@ -63,37 +77,50 @@ function mover(id){
     }
     switch (i) {
         case 0: 
-            if(array[1]=="-"){ right(0)} else { if(array[3]=="-"){down(0)}};
+            if(array[1]=="-"){ right(0); document.getElementById("cant-mov").innerHTML= contador();} 
+            else { if(array[3]=="-"){down(0); document.getElementById("cant-mov").innerHTML= contador();}};
             break;
         case 1: 
-            if(array[0]=="-"){left(1)} else{if(array[4]=="-"){down(1)} else{if(array[2]=="-"){right(1)}}};
+            if(array[0]=="-"){left(1); document.getElementById("cant-mov").innerHTML= contador();} 
+            else{if(array[4]=="-"){down(1); document.getElementById("cant-mov").innerHTML= contador();} 
+            else{if(array[2]=="-"){right(1); document.getElementById("cant-mov").innerHTML= contador();}}};
             break;
         case 2:
-            if(array[1]=="-"){left(2)} else{if(array[5]=="-"){down(2)}};
+            if(array[1]=="-"){left(2); document.getElementById("cant-mov").innerHTML= contador();} 
+            else{if(array[5]=="-"){down(2); document.getElementById("cant-mov").innerHTML= contador();}};
             break;
         case 3:
-            if(array[0]=="-"){up(3)} else {if(array[4]=="-"){right(3)} else {if(array[6]=="-"){down(3)}}};
+            if(array[0]=="-"){up(3); document.getElementById("cant-mov").innerHTML= contador();} 
+            else {if(array[4]=="-"){right(3); document.getElementById("cant-mov").innerHTML= contador();} 
+            else {if(array[6]=="-"){down(3); document.getElementById("cant-mov").innerHTML= contador();}}};
             break;
         case 4:
-            if(array[1]=="-"){up(4)} else {if(array[5]=="-"){right(4)} else {if(array[7]=="-"){down(4)} else{if(array[3]=="-"){left(4)}}}};
+            if(array[1]=="-"){up(4); document.getElementById("cant-mov").innerHTML= contador();} 
+            else {if(array[5]=="-"){right(4); document.getElementById("cant-mov").innerHTML= contador();} 
+            else {if(array[7]=="-"){down(4); document.getElementById("cant-mov").innerHTML= contador();} 
+            else{if(array[3]=="-"){left(4); document.getElementById("cant-mov").innerHTML= contador();}}}};
             break;
         case 5:
-            if(array[2]=="-"){up(5)} else {if(array[4]=="-"){left(5)} else {if(array[8]=="-"){down(5)}}};
+            if(array[2]=="-"){up(5); document.getElementById("cant-mov").innerHTML= contador();} 
+            else {if(array[4]=="-"){left(5); document.getElementById("cant-mov").innerHTML= contador();} 
+            else {if(array[8]=="-"){down(5); document.getElementById("cant-mov").innerHTML= contador();}}};
             break;
         case 6: 
-            if(array[3]=="-"){ up(6)} else { if(array[7]=="-"){right(6)}};
+            if(array[3]=="-"){ up(6); document.getElementById("cant-mov").innerHTML= contador();} 
+            else { if(array[7]=="-"){right(6); document.getElementById("cant-mov").innerHTML= contador();}};
             break;
         case 7: 
-            if(array[6]=="-"){left(7)} else{if(array[4]=="-"){up(7)} else{if(array[8]=="-"){right(7)}}};
+            if(array[6]=="-"){left(7); document.getElementById("cant-mov").innerHTML= contador();} 
+            else{if(array[4]=="-"){up(7); document.getElementById("cant-mov").innerHTML= contador();} 
+            else{if(array[8]=="-"){right(7); document.getElementById("cant-mov").innerHTML= contador();}}};
             break;
         case 8: 
-            if(array[5]=="-"){up(8)} else { if(array[7]=="-"){left(8)}};
+            if(array[5]=="-"){up(8); document.getElementById("cant-mov").innerHTML= contador();} 
+            else { if(array[7]=="-"){left(8); document.getElementById("cant-mov").innerHTML= contador();}};
             break;
         
 
     }
-
-
     cargar();
     
 }
@@ -121,4 +148,5 @@ function up(i){
     array[i-3]=array[i];
     array[i] = x;
 }
+
 
